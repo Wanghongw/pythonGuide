@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>11 datetime模块 - Python入门与进阶指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "11 datetime\u6a21\u5757";
+    var mkdocs_page_input_path = "python\u57fa\u7840/datetime\u6a21\u5757.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Python入门与进阶指南</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Python重要操作与实践总结</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../重要操作/up/">01 Python需求与提高篇</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../重要操作/compile/">02 py源文件编译</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../typical_case/">03 重要操作总结</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Python常用数据类型汇集</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../list/">01 列表list</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dict/">02 字典dict</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tuple/">03 元组tuple</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../字符串/">04 字符串str</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../set/">05 集合set</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../数字/">06 数字类型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Python内置函数与常用模块介绍</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../内置函数/">01 常用内置函数</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../异常/">02 异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../os模块/">03 os模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../sys模块/">04 sys模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../time模块/">05 time模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../序列化模块/">06 序列化模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../string/">07 string模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../random/">08 random模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../logging/">09 logging模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../optparse/">10 optparse模块</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">11 datetime模块</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">使用笔记</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_2">日期格式化</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">时间运算相关</a></li>
+    
+
+    <li class="toctree-l3"><a href="#datetime">datetime日期类型比较</a></li>
+    
+
+    <li class="toctree-l3"><a href="#datetoday">date.today</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_4">博客笔记</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../collections/">12 collections模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../加密解密/">13 加密与解密模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../configparser/">14 configparser模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../re模块/">15 正则表达式与re模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../操作excel/">15 Python3操作Excel</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../pymysql/">16 操作数据库pymysql模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../SQLAlchemy/">17 操作数据库SQLAlchemy模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hmac/">18 校验客户端的合法性hmac模块</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Python进阶-面向对象-网编并发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../python进阶/生成器/">01 生成器</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/面向对象/">02 面向对象</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/文件操作/">03 文件操作</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/with/">04 with上下文</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/闭包装饰器/">05 闭包与装饰器</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/描述符/">06 Python中的描述符</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/网编并发/">07 网络编程与并发编程</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/socket编程/">08 Python中原生的socket</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/copy/">09 Python中的深拷贝与浅拷贝</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/asyncio/">10 Python异步编程与asyncio</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Python实现算法与数据结构</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../python进阶/算法数据结构/">01 python实现算法与数据结构</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发环境-中间件等工具</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../python进阶/缓存与redis/">01 缓存与redis</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/Github与虚拟环境/">02 Github与虚拟环境的使用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/远程调试/">03 Pycharm连接远程代码</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python进阶/压测/">04 Mac/Linux压力测试神器Siege</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Linux服务端相关</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../python进阶/linux/">01 Linux服务端相关</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Python入门与进阶指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Python内置函数与常用模块介绍 &raquo;</li>
+        
+      
+    
+    <li>11 datetime模块</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="_1">使用笔记</h3>
+<pre><code class="python">from datetime import datetime,timedelta
+
+# 拿到的是&quot;时间对象&quot;
+print(datetime.now())#2019-03-20 15:23:32.883745
+
+# 将时间对象转换为时间戳 后面.是毫秒
+f = datetime.now() 
+s = datetime.timestamp(f)
+print(s)#1553066612.883745
+# 将时间戳转为时间对象
+print(datetime.fromtimestamp(s))#2019-03-20 15:23:32.883745
+
+# 将字符串转换成时间对象
+s = '2018-zz-20'
+f = datetime.strptime(s,'%Y-%m-%d')
+print(f,type(f))#2018-zz-20 00:00:00 &lt;class 'datetime.datetime'&gt;
+
+# 将时间对象转换成字符串，注意跟time的格式不一样！
+f1 = datetime.now()
+s1 = datetime.strftime(f,'%Y-%m-%d')
+print(s1,type(s1))#2018-zz-20 &lt;class 'str'&gt;
+
+
+### 做运算的是“时间对象”
+print(datetime.now() - timedelta(hours=10))
+#2019-03-20 05:26:16.183136
+print(datetime.now() - timedelta(days=1))
+#2019-03-19 15:26:16.183136
+</code></pre>
+
+<h3 id="_2">日期格式化</h3>
+<ul>
+<li>%y 两位数的年份表示（00-99）</li>
+<li>%Y 四位数的年份表示（000-9999）</li>
+<li>%m 月份（01-12）</li>
+<li>%d 月内中的一天（0-31）</li>
+<li>%H 24小时制小时数（0-23）</li>
+<li>%I 12小时制小时数（01-12）</li>
+<li>%M 分钟数（00=59）</li>
+<li>%S 秒（00-59）</li>
+<li>%a 本地简化星期名称</li>
+<li>%A 本地完整星期名称</li>
+<li>%b 本地简化的月份名称</li>
+<li>%B 本地完整的月份名称</li>
+<li>%c 本地相应的日期表示和时间表示</li>
+<li>%j 年内的一天（001-366）</li>
+<li>%p 本地A.M.或P.M.的等价符</li>
+<li>%U 一年中的星期数（00-53）星期天为星期的开始</li>
+<li>%w 星期（0-6），星期天为星期的开始</li>
+<li>%W 一年中的星期数（00-53）星期一为星期的开始</li>
+<li>%x 本地相应的日期表示</li>
+<li>%X 本地相应的时间表示</li>
+<li>%Z 当前时区的名称</li>
+<li>%% %号本身</li>
+</ul>
+<p>可以看到，这里的格式化的月份和月份中的天数，默认是<code>2</code>位数的，也就是说，如果小于<code>10</code>，就会显示前缀0，如<code>02月09日</code>。</p>
+<h3 id="_3">时间运算相关</h3>
+<pre><code class="python">import datetime
+
+
+# 指定时间
+print(datetime.datetime(2017,10,1,12,54,11,871281)) # 2017-10-01 12:54:11.871281
+
+now = datetime.datetime.now()
+print(now) # 2020-03-16 20:55:10.457931
+# 加5天
+day5 = now + datetime.timedelta(days=5) 
+print(day5) # 2020-03-21 20:55:10.457931
+
+# 时间替换
+f = now.replace(year=2222,month=3,day=5)
+print(f) # 2222-03-05 20:57:28.324392
+</code></pre>
+
+<h3 id="datetime">datetime日期类型比较</h3>
+<pre><code class="python">from datetime import datetime
+
+
+# 必须是字符串类型
+NOW_STR = datetime.strftime(datetime.now(),&quot;%Y-%m-%d %X&quot;)       
+user_exp_time = &quot;2020-03-14 00:00:00&quot;
+
+
+# 转换为datetime类型再比较
+date_now = datetime.strptime(NOW_STR,&quot;%Y-%m-%d %X&quot;)
+date_user = datetime.strptime(user_exp_time,&quot;%Y-%m-%d %X&quot;)
+
+print(date_now,type(date_now))
+print(date_user,type(date_user))
+&quot;&quot;&quot;
+2020-04-09 10:07:50 &lt;class 'datetime.datetime'&gt;
+2020-03-14 00:00:00 &lt;class 'datetime.datetime'&gt;
+&quot;&quot;&quot;
+
+print(date_now &gt; date_user) # True
+
+</code></pre>
+
+<h3 id="datetoday">date.today</h3>
+<pre><code class="python">from datetime import date
+
+
+today = date.today()
+print(today,type(today)) # 2019-02-22 &lt;class 'datetime.date'&gt;
+
+today_str = today.strftime(&quot;%Y-%m-%d&quot;)
+print(today_str,type(today_str)) # 2019-02-22 &lt;class 'str'&gt;
+</code></pre>
+
+<h3 id="_4">博客笔记</h3>
+<p><a href="https://www.cnblogs.com/paulwhw/articles/12506788.html">datetime模块格式化以及去掉前导0的操作说明</a></p>
+<p><a href="https://www.cnblogs.com/paulwhw/articles/12667535.html">pymysql往数据库中插入datetime类型的"空数据"与MySQL5.7sql_mode的一个问题</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../collections/" class="btn btn-neutral float-right" title="12 collections模块">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../optparse/" class="btn btn-neutral" title="10 optparse模块"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../optparse/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../collections/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
