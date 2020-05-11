@@ -131,6 +131,9 @@
     <li class="toctree-l3"><a href="#mapzipfiltersorted">map、zip、filter、sorted的几个进阶实例</a></li>
     
 
+    <li class="toctree-l3"><a href="#mapdatetime">使用map实现与datetime模块实现日期递推</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -453,6 +456,20 @@ print(list(r6)) # [] —— 取完一次就没得了！
 
 <h3 id="mapzipfiltersorted">map、zip、filter、sorted的几个进阶实例</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/9060106.html">列表、字典与内置函数结合的几个进阶操作</a></p>
+<h3 id="mapdatetime">使用map实现与datetime模块实现日期递推</h3>
+<pre><code class="python">from datetime import datetime,timedelta
+
+
+# date_end_time对应的是y_lst最后一个数对应的日期
+# 需要得到一个日期列表date_lst中的每个日期值与y_lst中对应上
+date_end_time = &quot;2020-05-03&quot;
+y_lst = [1,2,43,44,55,66]
+
+date_lst = list(map(lambda x:datetime.strftime(datetime.strptime(date_end_time,&quot;%Y-%m-%d&quot;)-timedelta(days=x),&quot;%Y-%m-%d&quot;),range(len(y_lst)-1,-1,-1)))
+
+print(date_lst)
+# ['2020-04-28', '2020-04-29', '2020-04-30', '2020-05-01', '2020-05-02', '2020-05-03']
+</code></pre>
               
             </div>
           </div>

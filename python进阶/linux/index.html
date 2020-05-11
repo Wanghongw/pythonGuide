@@ -271,10 +271,13 @@
     <a class="current" href="./">01 Linux服务端相关</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">个人博客</a></li>
+    <li class="toctree-l3"><a href="#_1">零散知识点</a></li>
     
 
-    <li class="toctree-l3"><a href="#_2">优秀参考文档</a></li>
+    <li class="toctree-l3"><a href="#_2">个人博客</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">优秀参考文档</a></li>
     
 
     </ul>
@@ -318,7 +321,18 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="_1">个人博客</h3>
+                <h3 id="_1">零散知识点</h3>
+<p><strong>shell命令中不能有中英文的单括号</strong></p>
+<p>windows上传文件到服务器的时候文件名会多一些中文的括号：<code>teml（1）.csv</code></p>
+<p>如果在shell中执行命令：将文件中的内容写入新文件的话会有问题：</p>
+<pre><code class="python">cat /home/whw/teml（1）.csv &gt; /homwe/whw/teml_new.csv
+</code></pre>
+
+<p>这样写会报错，可以将文件名用引号包起来：</p>
+<pre><code class="python">cat &quot;/home/whw/teml（1）.csv&quot; &gt; &quot;/home/whw/teml_new.csv&quot;
+</code></pre>
+
+<h3 id="_2">个人博客</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/11140036.html">docker学习与应用</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/10783225.html">Linux下vim基本命令</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/11116363.html">nginx.conf文件内容详解</a></p>
@@ -326,7 +340,7 @@
 <p><a href="https://www.cnblogs.com/paulwhw/p/11125248.html">centos7部署前后端分离项目的过程</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/11122400.html">在裸机centos7系统中部署django项目的过程</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/11103162.html">linux下虚拟环境模块virtualenv及管理工具virtualenvwrapper的使用</a></p>
-<h3 id="_2">优秀参考文档</h3>
+<h3 id="_3">优秀参考文档</h3>
 <p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html">Linux工具快速教程</a></p>
               
             </div>

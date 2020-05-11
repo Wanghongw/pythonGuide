@@ -130,6 +130,9 @@
     <li class="toctree-l3"><a href="#_4">自己总结了几篇相关的博客</a></li>
     
 
+    <li class="toctree-l3"><a href="#rename">rename方法实现文件新内容替换旧内容</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -436,6 +439,54 @@ os.chdir(&quot;E:\practice&quot;)
 <p><a href="https://www.cnblogs.com/paulwhw/p/8889043.html">关于文件路径的生成</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/8652780.html">Python3 文件的重命名</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/10714995.html">求文件夹大小与删除文件夹：文件夹中有子文件夹与文件，子文件夹中有文件</a></p>
+<h3 id="rename">rename方法实现文件新内容替换旧内容</h3>
+<p>将文件<code>file_new_path</code>中的内容替换到<code>file_path</code>中并且不修改<code>file_path</code>的文件名。</p>
+<p>最后默认会删掉<code>file_new_path</code>这个文件。</p>
+<pre><code class="python">import os
+
+
+### 测试：file_new_path中存的是新内容，file_path中存的是旧内容，需要把新内容替换到旧内容中，但是文件名还得是file_path的！ 
+file_path = &quot;/Users/wanghongwei/file.txt&quot;
+file_new_path = &quot;/Users/wanghongwei/file_new.txt&quot;
+
+with open(file_path,&quot;r&quot;) as f1:
+    file_msg = f1.read()
+
+
+with open(file_new_path,&quot;r&quot;) as f2:
+    file_new_msg = f2.read()
+
+print(&quot;file_msg&gt;&gt;&gt;&quot;,file_msg)
+&quot;&quot;&quot;
+file_msg&gt;&gt;&gt; file
+file
+file
+&quot;&quot;&quot;
+print(&quot;file_new_msg&gt;&gt;&gt;&quot;,file_new_msg)
+&quot;&quot;&quot;
+file_new_msg&gt;&gt;&gt; file_new
+file_new
+file_new
+&quot;&quot;&quot;
+# 修改 + 替换 —— 只在mac/linux下可直接用rename
+os.rename(file_new_path,file_path)
+print(&quot;新的file_path的值：&quot;,file_path)
+&quot;&quot;&quot;
+新的file_path的值： /Users/wanghongwei/file.txt
+&quot;&quot;&quot;
+
+### 重新打开file_path中的内容看看：
+with open(file_path,&quot;r&quot;) as f3:
+    file_msg = f3.read()
+print(&quot;新的file_path中的内容：&quot;,file_msg)
+# 文件内容被替换了
+&quot;&quot;&quot;
+新的file_path中的内容： file_new
+file_new
+file_new
+&quot;&quot;&quot;
+##### 最后可以看到，file_new_path这个目录下的文件被系统默认删掉了！！！
+</code></pre>
               
             </div>
           </div>
