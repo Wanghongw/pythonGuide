@@ -79,7 +79,10 @@
     <li class="toctree-l3"><a href="#_1">列表的基本操作</a></li>
     
 
-    <li class="toctree-l3"><a href="#_2">列表生成式</a></li>
+    <li class="toctree-l3"><a href="#_2">列表切片的说明</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">列表生成式</a></li>
     
 
     <li class="toctree-l3"><a href="#1">删除列表中的元素1</a></li>
@@ -88,22 +91,22 @@
     <li class="toctree-l3"><a href="#2">删除列表中的元素2</a></li>
     
 
-    <li class="toctree-l3"><a href="#_3">列表正负数的排序</a></li>
+    <li class="toctree-l3"><a href="#_4">列表正负数的排序</a></li>
     
 
     <li class="toctree-l3"><a href="#listsortreverse">list的sort与reverse方法是对源列表的修改</a></li>
     
 
-    <li class="toctree-l3"><a href="#_4">有关生成列表相关方法在性能上的测试</a></li>
+    <li class="toctree-l3"><a href="#_5">有关生成列表相关方法在性能上的测试</a></li>
     
 
-    <li class="toctree-l3"><a href="#_5">实际中使用列表的一个坑</a></li>
+    <li class="toctree-l3"><a href="#_6">实际中使用列表的一个坑</a></li>
     
 
-    <li class="toctree-l3"><a href="#_6">列表有关的几个小练习</a></li>
+    <li class="toctree-l3"><a href="#_7">列表有关的几个小练习</a></li>
     
 
-    <li class="toctree-l3"><a href="#_7">列表当作函数默认参数的坑</a></li>
+    <li class="toctree-l3"><a href="#_8">列表当作函数默认参数的坑</a></li>
     
 
     </ul>
@@ -220,11 +223,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../python进阶/生成器/">01 生成器</a>
+    <a class="" href="../../python进阶/面向对象/">01 Python进阶知识点与面向对象整合</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/面向对象/">02 面向对象</a>
+    <a class="" href="../../python进阶/生成器/">02 生成器</a>
                 </li>
                 <li class="">
                     
@@ -344,6 +347,42 @@
               
                 <h3 id="_1">列表的基本操作</h3>
 <p>列表的基本操作包括：索引取值、切片、添加元素(insert、append、extend)、删除元素(pop、remove、clear、del)、修改、排序、取索引(index方法)、反转等等，我自己总结了下相关的练习代码：</p>
+<h3 id="_2">列表切片的说明</h3>
+<pre><code class="python"># 模式[start:end:step]
+&quot;&quot;&quot;
+    其中，第一个数字start表示切片开始位置，默认为0；
+    第二个数字end表示切片截止（但不包含）位置（默认为列表长度）；
+    第三个数字step表示切片的步长（默认为1）。
+    当start为0时可以省略，当end为列表长度时可以省略，
+    当step为1时可以省略，并且省略步长时可以同时省略最后一个冒号。
+    另外，当step为负整数时，表示反向切片，这时start应该比end的值要大才行。
+&quot;&quot;&quot;
+aList = [3, 4, 5, 6, 7, 9, 11, 13, 15, 17]
+print (aList[::])  # 返回包含原列表中所有元素的新列表
+print (aList[::-1])  # 返回包含原列表中所有元素的逆序列表
+print (aList[::2])  # 隔一个取一个，获取偶数位置的元素
+print (aList[1::2])  # 隔一个取一个，获取奇数位置的元素
+print (aList[3:6])  # 指定切片的开始和结束位置
+aList[0:100]  # 切片结束位置大于列表长度时，从列表尾部截断
+aList[100:]  # 切片开始位置大于列表长度时，返回空列表
+
+aList[len(aList):] = [9]  # 在列表尾部增加元素
+aList[:0] = [1, 2]  # 在列表头部插入元素
+aList[3:3] = [4]  # 在列表中间位置插入元素
+aList[:3] = [1, 2]  # 替换列表元素，等号两边的列表长度相等
+aList[3:] = [4, 5, 6]  # 等号两边的列表长度也可以不相等
+aList[::2] = [0] * 3  # 隔一个修改一个
+print (aList)
+aList[::2] = ['a', 'b', 'c']  # 隔一个修改一个
+print (aList)
+#aList[::2] = [1,2]  # 左侧切片不连续，等号两边列表长度必须相等
+aList[:3] = []  # 删除列表中前3个元素
+print (aList)
+del aList[:3]  # 切片元素连续
+print (aList)
+del aList[::2]  # 切片元素不连续，隔一个删一个
+</code></pre>
+
 <p><strong>demo1</strong></p>
 <pre><code class="python">l1 = ['Naruto','Sakurua','Sasukey','wanghw']
 # 索引
@@ -503,7 +542,7 @@ for i,v in enumerate(products,1):
    print(str(i)+'.',v[0],v[1])
 </code></pre>
 
-<h3 id="_2">列表生成式</h3>
+<h3 id="_3">列表生成式</h3>
 <p>列表的推导式又叫列表生成式，列表的生成式生成列表的效率是最高的，实际中大家尽量使用列表的推导式：</p>
 <pre><code class="python">lst = [1,2,3,4,5]
 lst2 = [i**2 for i in lst]
@@ -569,7 +608,7 @@ for i in range(len(l2)-1,-1,-1):
 print(l2)
 </code></pre>
 
-<h3 id="_3">列表正负数的排序</h3>
+<h3 id="_4">列表正负数的排序</h3>
 <pre><code class="python">lst = [1, -2, 10, -12, -4, -5, 9, 2]
 # 将列表进行排序，正数在前，负数在后，并且分别按绝对值从小到大
 lst.sort(key=lambda x:(x&lt;0,abs(x)))
@@ -588,18 +627,53 @@ print(l2)#None
 print(l)#[0, 1, 2, 3]
 </code></pre>
 
-<h3 id="_4">有关生成列表相关方法在性能上的测试</h3>
+<h3 id="_5">有关生成列表相关方法在性能上的测试</h3>
 <p>我在这篇博客详细介绍了生成列表的一些方法在性能上的测试记录：</p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/12150685.html">Python内置数据类型list各方法的性能测试</a></p>
-<h3 id="_5">实际中使用列表的一个坑</h3>
+<h3 id="_6">实际中使用列表的一个坑</h3>
 <p>我在写业务代码的时候发现过一个关于列表的问题，记录在了这篇文章中：</p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/12054976.html">Python可变数据类型list填坑一则</a></p>
-<h3 id="_6">列表有关的几个小练习</h3>
+<h3 id="_7">列表有关的几个小练习</h3>
 <p><strong>自己平时写代码时总结的一些demo</strong></p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/9144699.html">列表中数字元素转字符串的不同解法</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
-<h3 id="_7">列表当作函数默认参数的坑</h3>
+<h3 id="_8">列表当作函数默认参数的坑</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/11891081.html">关于“可变数据类型”做函数默认参数的问题</a></p>
+<pre><code class="python">def add(a, b):
+    a += b
+    return a
+
+class Company:
+    def __init__(self, name, staffs=[]):
+        self.name = name
+        self.staffs = staffs
+    def add(self, staff_name):
+        self.staffs.append(staff_name)
+    def remove(self, staff_name):
+        self.staffs.remove(staff_name)
+
+if __name__ == &quot;__main__&quot;:
+    # 初始化的时候指定staffs列表的话，用传入的这个列表
+    com1 = Company(&quot;com1&quot;, [&quot;whw1&quot;, &quot;whw2&quot;])
+    com1.add(&quot;whw3&quot;)
+    com1.remove(&quot;whw1&quot;)
+    print(com1.staffs) # ['whw2', 'whw3']
+
+    # 初始化的时候不指定staffs的话，用默认的哪个列表！—— 可能会与其他不指定staffs的对象用同一个列表！
+    com2 = Company(&quot;com2&quot;)
+    com2.add(&quot;whw&quot;)
+    print(com2.staffs) # ['whw']
+
+
+    print(&quot;default&gt;&gt;&quot;,Company.__init__.__defaults__) # default&gt;&gt; (['whw'],)
+
+    com3 = Company(&quot;com3&quot;)
+    com3.add(&quot;whw5&quot;)
+    print (com2.staffs) # ['whw', 'whw5']
+    print (com3.staffs) # ['whw', 'whw5']
+    print (com2.staffs is com3.staffs) # True
+
+</code></pre>
               
             </div>
           </div>
