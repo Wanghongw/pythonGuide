@@ -80,7 +80,13 @@
     <li class="toctree-l3"><a href="#_4">堆栈法计算文件夹大小</a></li>
     
 
-    <li class="toctree-l3"><a href="#_5">自己实现一个计算器</a></li>
+    <li class="toctree-l3"><a href="#_5">堆栈法清空文件夹</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_6">分割存放连续时间字符串的列表</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_7">自己实现一个计算器</a></li>
     
 
     <li class="toctree-l3"><a href="#python">Python多属性排序</a></li>
@@ -89,25 +95,25 @@
     <li class="toctree-l3"><a href="#python3typehint">python3中的typehint</a></li>
     
 
-    <li class="toctree-l3"><a href="#_6">堆栈的几个练习</a></li>
+    <li class="toctree-l3"><a href="#_8">堆栈的几个练习</a></li>
     
 
-    <li class="toctree-l3"><a href="#_7">文件修改的两种方式</a></li>
+    <li class="toctree-l3"><a href="#_9">文件修改的两种方式</a></li>
     
 
-    <li class="toctree-l3"><a href="#_8">遍历文件夹下的所有文件</a></li>
+    <li class="toctree-l3"><a href="#_10">遍历文件夹下的所有文件</a></li>
     
 
-    <li class="toctree-l3"><a href="#_9">重命名与删除</a></li>
+    <li class="toctree-l3"><a href="#_11">重命名与删除</a></li>
     
 
-    <li class="toctree-l3"><a href="#_10">杀进程</a></li>
+    <li class="toctree-l3"><a href="#_12">杀进程</a></li>
     
 
     <li class="toctree-l3"><a href="#salt">salt推送文件</a></li>
     
 
-    <li class="toctree-l3"><a href="#_11">抖音</a></li>
+    <li class="toctree-l3"><a href="#_13">抖音</a></li>
     
 
     <li class="toctree-l3"><a href="#iter">iter方法读取文件</a></li>
@@ -116,7 +122,7 @@
     <li class="toctree-l3"><a href="#-">开启多线程-爬取科斯林词典</a></li>
     
 
-    <li class="toctree-l3"><a href="#_12">递归嵌套列表的练习</a></li>
+    <li class="toctree-l3"><a href="#_14">递归嵌套列表的练习</a></li>
     
 
     <li class="toctree-l3"><a href="#socket">socket传输是选择是否根据协议接受与发送</a></li>
@@ -540,7 +546,34 @@ while lis:
 print(count)
 </code></pre>
 
-<h3 id="_5">自己实现一个计算器</h3>
+<h3 id="_5">堆栈法清空文件夹</h3>
+<pre><code class="python"># -*- coding:utf-8 -*-
+import os
+
+def del_dir(filepath):
+    lis = [filepath]
+    lst = []
+    while lis:
+        path = lis.pop()
+        for f in os.listdir(path):
+            sub_path = os.path.join(path,f)
+            if os.path.isfile(sub_path):
+                os.remove(sub_path)
+            elif os.path.isdir(sub_path):
+                lis.append(sub_path)
+                lst.append(sub_path)
+    # 把所有文件删完后，再处理里面的空文件夹
+    # 注意这里 倒序 取！从里往外删
+    for f in lst[::-1]:
+        os.rmdir(f)
+    # 最后再把最外面的目录删掉 —— 整个目录就没得了
+    os.rmdir(filepath)
+
+</code></pre>
+
+<h3 id="_6">分割存放连续时间字符串的列表</h3>
+<p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
+<h3 id="_7">自己实现一个计算器</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import re
 
@@ -719,11 +752,11 @@ def my_callable(name:str,age:int,callback:typing.Callable[[str,int],dict]):
 print(my_callable('wanghw',18,create_dic)) # {'name': 'wanghw', 'age': 18}
 </code></pre>
 
-<h3 id="_6">堆栈的几个练习</h3>
+<h3 id="_8">堆栈的几个练习</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/10753067.html">堆栈相关的几个练习——堆栈效率高于递归</a></p>
-<h3 id="_7">文件修改的两种方式</h3>
+<h3 id="_9">文件修改的两种方式</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/8675570.html">文件修改的两种方式</a></p>
-<h3 id="_8">遍历文件夹下的所有文件</h3>
+<h3 id="_10">遍历文件夹下的所有文件</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 
@@ -735,7 +768,7 @@ for item in os.walk('/Users/wanghongwei/PycharmProjects/deploy27/deploy'):
     print(item)
 </code></pre>
 
-<h3 id="_9">重命名与删除</h3>
+<h3 id="_11">重命名与删除</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import shutil
 
@@ -744,7 +777,7 @@ shutil.move('/Users/wanghongwei/PycharmProjects/deploy27/deploy1','/Users/wangho
 shutil.rmtree('/Users/wanghongwei/PycharmProjects/deploy27/t')
 </code></pre>
 
-<h3 id="_10">杀进程</h3>
+<h3 id="_12">杀进程</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 import signal
@@ -810,7 +843,7 @@ ret = client.cmd('*','cp.get_url',('http://www.pythonav.com/allstatic/imgs/mv/pi
 
 </code></pre>
 
-<h3 id="_11">抖音</h3>
+<h3 id="_13">抖音</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import re
 import requests
@@ -1035,7 +1068,7 @@ def spider_collins():
     f.close()
 </code></pre>
 
-<h3 id="_12">递归嵌套列表的练习</h3>
+<h3 id="_14">递归嵌套列表的练习</h3>
 <p><strong>递归实现列表的嵌套查找</strong></p>
 <pre><code class="python"># 将列表lis中的&quot;tt&quot;变成⼤写
 def recursion1(lis):
@@ -1136,7 +1169,7 @@ def pro_recv(sk,pro=True):
 
 </code></pre>
 
-<h3 id="_13"></h3>
+<h3 id="_15"></h3>
               
             </div>
           </div>
