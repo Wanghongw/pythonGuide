@@ -187,7 +187,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../面向对象/">01 Python进阶知识点与面向对象整合</a>
+    <a class="" href="../面向对象/">01 进阶知识点与面向对象整合</a>
                 </li>
                 <li class="">
                     
@@ -337,7 +337,7 @@ foo = Foo(&quot;Wanghw&quot;, 18)
 
 <p>我们不能称 foo.name, foo.age 这两个属性为描述符，因为它们都没有绑定上面三个方法。</p>
 <p>默认情况下, 对象的属性访问是通过get, set, delete这三个方法访问属性的字典__dict__来实现的。</p>
-<p>比如说，a.x会首先查找a.<strong>dict</strong>['x'], 如果没有找到则查找type(a).<strong>dict</strong>['x'], 然后不断的往上查找直到metaclass(不包括metaclass)。</p>
+<p>比如说，a.x会首先查找a.__dict__['x'], 如果没有找到则查找type(a).__dict__['x'], 然后不断的往上查找直到metaclass(不包括metaclass)。</p>
 <p>如下代码所示：</p>
 <pre><code class="python">class Foo(object):
     country = &quot;China&quot;
