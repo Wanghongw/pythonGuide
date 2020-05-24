@@ -74,19 +74,22 @@
     <li class="toctree-l3"><a href="#_2">单例模式</a></li>
     
 
-    <li class="toctree-l3"><a href="#_3">生成大文件的秘文</a></li>
+    <li class="toctree-l3"><a href="#_3">生成器读取大文件的例子</a></li>
     
 
-    <li class="toctree-l3"><a href="#_4">堆栈法计算文件夹大小</a></li>
+    <li class="toctree-l3"><a href="#_4">生成大文件的秘文</a></li>
     
 
-    <li class="toctree-l3"><a href="#_5">堆栈法清空文件夹</a></li>
+    <li class="toctree-l3"><a href="#_5">堆栈法计算文件夹大小</a></li>
     
 
-    <li class="toctree-l3"><a href="#_6">分割存放连续时间字符串的列表</a></li>
+    <li class="toctree-l3"><a href="#_6">堆栈法清空文件夹</a></li>
     
 
-    <li class="toctree-l3"><a href="#_7">自己实现一个计算器</a></li>
+    <li class="toctree-l3"><a href="#_7">分割存放连续时间字符串的列表</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_8">自己实现一个计算器</a></li>
     
 
     <li class="toctree-l3"><a href="#python">Python多属性排序</a></li>
@@ -95,25 +98,25 @@
     <li class="toctree-l3"><a href="#python3typehint">python3中的typehint</a></li>
     
 
-    <li class="toctree-l3"><a href="#_8">堆栈的几个练习</a></li>
+    <li class="toctree-l3"><a href="#_9">堆栈的几个练习</a></li>
     
 
-    <li class="toctree-l3"><a href="#_9">文件修改的两种方式</a></li>
+    <li class="toctree-l3"><a href="#_10">文件修改的两种方式</a></li>
     
 
-    <li class="toctree-l3"><a href="#_10">遍历文件夹下的所有文件</a></li>
+    <li class="toctree-l3"><a href="#_11">遍历文件夹下的所有文件</a></li>
     
 
-    <li class="toctree-l3"><a href="#_11">重命名与删除</a></li>
+    <li class="toctree-l3"><a href="#_12">重命名与删除</a></li>
     
 
-    <li class="toctree-l3"><a href="#_12">杀进程</a></li>
+    <li class="toctree-l3"><a href="#_13">杀进程</a></li>
     
 
     <li class="toctree-l3"><a href="#salt">salt推送文件</a></li>
     
 
-    <li class="toctree-l3"><a href="#_13">抖音</a></li>
+    <li class="toctree-l3"><a href="#_14">抖音</a></li>
     
 
     <li class="toctree-l3"><a href="#iter">iter方法读取文件</a></li>
@@ -122,7 +125,7 @@
     <li class="toctree-l3"><a href="#-">开启多线程-爬取科斯林词典</a></li>
     
 
-    <li class="toctree-l3"><a href="#_14">递归嵌套列表的练习</a></li>
+    <li class="toctree-l3"><a href="#_15">递归嵌套列表的练习</a></li>
     
 
     <li class="toctree-l3"><a href="#socket">socket传输是选择是否根据协议接受与发送</a></li>
@@ -257,7 +260,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../python进阶/生成器/">02 生成器</a>
+    <a class="" href="../python进阶/生成器/">02 迭代器与生成器</a>
                 </li>
                 <li class="">
                     
@@ -503,7 +506,33 @@ if __name__ == '__main__':
 
 <p><code>基于模块导入的单例模式</code></p>
 <p><a href="https://huoyingwhw.com/2019/04/13/%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">基于模块导入的单例模式</a></p>
-<h3 id="_3">生成大文件的秘文</h3>
+<h3 id="_3">生成器读取大文件的例子</h3>
+<p>有一个文件 大概有500G，并且只有一行，行之间有分隔符，我们需要把文件内的数据一行一行的读取出来，然后写入数据库里面。</p>
+<pre><code class="python">#500G:一行，中间用{|}分开
+def myreadlines(f, newline):
+  buf = &quot;&quot;
+  while True:
+    while newline in buf:
+      pos = buf.index(newline)
+      yield buf[:pos]
+      buf = buf[pos + len(newline):]
+    chunk = f.read(4096)
+
+    if not chunk:
+      #说明已经读到了文件结尾
+      yield buf
+      break
+    buf += chunk
+
+if __name__ == '__main__':
+
+  with open(&quot;input.txt&quot;) as f:
+      for line in myreadlines(f, &quot;{|}&quot;):
+          print (line)
+
+</code></pre>
+
+<h3 id="_4">生成大文件的秘文</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 import hashlib
@@ -527,7 +556,7 @@ if __name__ == '__main__':
     #6a37f182c3501c4d328760818439efa5
 </code></pre>
 
-<h3 id="_4">堆栈法计算文件夹大小</h3>
+<h3 id="_5">堆栈法计算文件夹大小</h3>
 <pre><code class="python">import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__name__))
@@ -546,7 +575,7 @@ while lis:
 print(count)
 </code></pre>
 
-<h3 id="_5">堆栈法清空文件夹</h3>
+<h3 id="_6">堆栈法清空文件夹</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 
@@ -571,9 +600,9 @@ def del_dir(filepath):
 
 </code></pre>
 
-<h3 id="_6">分割存放连续时间字符串的列表</h3>
+<h3 id="_7">分割存放连续时间字符串的列表</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
-<h3 id="_7">自己实现一个计算器</h3>
+<h3 id="_8">自己实现一个计算器</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import re
 
@@ -752,11 +781,11 @@ def my_callable(name:str,age:int,callback:typing.Callable[[str,int],dict]):
 print(my_callable('wanghw',18,create_dic)) # {'name': 'wanghw', 'age': 18}
 </code></pre>
 
-<h3 id="_8">堆栈的几个练习</h3>
+<h3 id="_9">堆栈的几个练习</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/10753067.html">堆栈相关的几个练习——堆栈效率高于递归</a></p>
-<h3 id="_9">文件修改的两种方式</h3>
+<h3 id="_10">文件修改的两种方式</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/8675570.html">文件修改的两种方式</a></p>
-<h3 id="_10">遍历文件夹下的所有文件</h3>
+<h3 id="_11">遍历文件夹下的所有文件</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 
@@ -768,7 +797,7 @@ for item in os.walk('/Users/wanghongwei/PycharmProjects/deploy27/deploy'):
     print(item)
 </code></pre>
 
-<h3 id="_11">重命名与删除</h3>
+<h3 id="_12">重命名与删除</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import shutil
 
@@ -777,7 +806,7 @@ shutil.move('/Users/wanghongwei/PycharmProjects/deploy27/deploy1','/Users/wangho
 shutil.rmtree('/Users/wanghongwei/PycharmProjects/deploy27/t')
 </code></pre>
 
-<h3 id="_12">杀进程</h3>
+<h3 id="_13">杀进程</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import os
 import signal
@@ -843,7 +872,7 @@ ret = client.cmd('*','cp.get_url',('http://www.pythonav.com/allstatic/imgs/mv/pi
 
 </code></pre>
 
-<h3 id="_13">抖音</h3>
+<h3 id="_14">抖音</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import re
 import requests
@@ -1068,7 +1097,7 @@ def spider_collins():
     f.close()
 </code></pre>
 
-<h3 id="_14">递归嵌套列表的练习</h3>
+<h3 id="_15">递归嵌套列表的练习</h3>
 <p><strong>递归实现列表的嵌套查找</strong></p>
 <pre><code class="python"># 将列表lis中的&quot;tt&quot;变成⼤写
 def recursion1(lis):
@@ -1169,7 +1198,7 @@ def pro_recv(sk,pro=True):
 
 </code></pre>
 
-<h3 id="_15"></h3>
+<h3 id="_16"></h3>
               
             </div>
           </div>
