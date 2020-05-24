@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>11 datetime模块 - Python入门与进阶指南</title>
+  <title>11 datetime与dateutil模块 - Python服务端入门与进阶指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "11 datetime\u6a21\u5757";
+    var mkdocs_page_name = "11 datetime\u4e0edateutil\u6a21\u5757";
     var mkdocs_page_input_path = "python\u57fa\u7840/datetime\u6a21\u5757.md";
     var mkdocs_page_url = null;
   </script>
@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> Python入门与进阶指南</a>
+        <a href="../.." class="icon icon-home"> Python服务端入门与进阶指南</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -144,10 +144,13 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">11 datetime模块</a>
+    <a class="current" href="./">11 datetime与dateutil模块</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">使用笔记</a></li>
+    <li class="toctree-l3"><a href="#_1">计算两个日期间隔的天数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#datetime">datetime使用笔记</a></li>
     
 
     <li class="toctree-l3"><a href="#_2">日期格式化</a></li>
@@ -156,10 +159,13 @@
     <li class="toctree-l3"><a href="#_3">时间运算相关</a></li>
     
 
-    <li class="toctree-l3"><a href="#datetime">datetime日期类型比较</a></li>
+    <li class="toctree-l3"><a href="#datetime_1">datetime日期类型比较</a></li>
     
 
     <li class="toctree-l3"><a href="#datetoday">date.today</a></li>
+    
+
+    <li class="toctree-l3"><a href="#mapdatetime">使用map实现与datetime模块实现日期递推</a></li>
     
 
     <li class="toctree-l3"><a href="#_4">博客笔记</a></li>
@@ -185,19 +191,19 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../操作excel/">15 Python3操作Excel</a>
+    <a class="" href="../操作excel/">16 Python3操作Excel</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../pymysql/">16 操作数据库pymysql模块</a>
+    <a class="" href="../pymysql/">17 操作数据库pymysql模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../SQLAlchemy/">17 操作数据库SQLAlchemy模块</a>
+    <a class="" href="../SQLAlchemy/">18 操作数据库SQLAlchemy模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../hmac/">18 校验客户端的合法性hmac模块</a>
+    <a class="" href="../hmac/">19 校验客户端的合法性hmac模块</a>
                 </li>
     </ul>
 	    </li>
@@ -304,7 +310,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">Python入门与进阶指南</a>
+        <a href="../..">Python服务端入门与进阶指南</a>
       </nav>
 
       
@@ -320,7 +326,7 @@
         
       
     
-    <li>11 datetime模块</li>
+    <li>11 datetime与dateutil模块</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -330,7 +336,51 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="_1">使用笔记</h3>
+                <h3 id="_1">计算两个日期间隔的天数</h3>
+<p><strong>datetime模块会有负数</strong></p>
+<pre><code class="python">from datetime import datetime
+
+day1 = datetime(2019,2,3)
+day2 = datetime(2022,12,30)
+
+# 时间差 —— 必须都是datetime格式的数据 —— 会有负数
+print((day1 - day2).days) # -1426
+</code></pre>
+
+<p><strong>dateutil模块如果end的日期小于start的日期会返回0</strong></p>
+<pre><code class="python">from datetime import datetime
+
+# day1 = datetime(2019,2,3)
+# day2 = datetime(2022,12,30)
+
+# 时间差 —— 必须都是datetime格式的数据
+# print((day1 - day2).days) # -1426
+
+
+from dateutil import rrule
+
+day1_str = &quot;2020-1-03&quot;
+day2_str = &quot;2020-05-05&quot;
+day3_str = &quot;2019-05-05&quot;
+
+### 正常情况：结束日期小🌧于开始日期
+start_time = datetime.strptime(day1_str,&quot;%Y-%m-%d&quot;)
+end_time = datetime.strptime(day2_str,&quot;%Y-%m-%d&quot;)
+days_format = rrule.rrule(freq=rrule.DAILY,dtstart=start_time,until=end_time)
+print(days_format)
+&quot;&quot;&quot;
+DTSTART:20200103T000000
+RRULE:FREQ=DAILY;UNTIL=20200505T000000
+&quot;&quot;&quot;
+print(days_format.count()) # 124
+
+### 如果结束日期大雨开始日期会返回0
+d3_end = datetime.strptime(day3_str,&quot;%Y-%m-%d&quot;)
+days_format2 = rrule.rrule(freq=rrule.DAILY,dtstart=start_time,until=d3_end)
+print(days_format2.count()) # 0
+</code></pre>
+
+<h3 id="datetime">datetime使用笔记</h3>
 <pre><code class="python">from datetime import datetime,timedelta
 
 # 拿到的是&quot;时间对象&quot;
@@ -405,7 +455,7 @@ f = now.replace(year=2222,month=3,day=5)
 print(f) # 2222-03-05 20:57:28.324392
 </code></pre>
 
-<h3 id="datetime">datetime日期类型比较</h3>
+<h3 id="datetime_1">datetime日期类型比较</h3>
 <pre><code class="python">from datetime import datetime
 
 
@@ -440,7 +490,23 @@ today_str = today.strftime(&quot;%Y-%m-%d&quot;)
 print(today_str,type(today_str)) # 2019-02-22 &lt;class 'str'&gt;
 </code></pre>
 
+<h3 id="mapdatetime">使用map实现与datetime模块实现日期递推</h3>
+<pre><code class="python">from datetime import datetime,timedelta
+
+
+# date_end_time对应的是y_lst最后一个数对应的日期
+# 需要得到一个日期列表date_lst中的每个日期值与y_lst中对应上
+date_end_time = &quot;2020-05-03&quot;
+y_lst = [1,2,43,44,55,66]
+
+date_lst = list(map(lambda x:datetime.strftime(datetime.strptime(date_end_time,&quot;%Y-%m-%d&quot;)-timedelta(days=x),&quot;%Y-%m-%d&quot;),range(len(y_lst)-1,-1,-1)))
+
+print(date_lst)
+# ['2020-04-28', '2020-04-29', '2020-04-30', '2020-05-01', '2020-05-02', '2020-05-03']
+</code></pre>
+
 <h3 id="_4">博客笔记</h3>
+<p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12506788.html">datetime模块格式化以及去掉前导0的操作说明</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12667535.html">pymysql往数据库中插入datetime类型的"空数据"与MySQL5.7sql_mode的一个问题</a></p>
               
