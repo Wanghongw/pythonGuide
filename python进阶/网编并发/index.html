@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>07 网络编程与并发编程 - Python服务端入门与进阶指南</title>
+  <title>03 网络编程与并发编程 - Python服务端入门与进阶指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "07 \u7f51\u7edc\u7f16\u7a0b\u4e0e\u5e76\u53d1\u7f16\u7a0b";
+    var mkdocs_page_name = "03 \u7f51\u7edc\u7f16\u7a0b\u4e0e\u5e76\u53d1\u7f16\u7a0b";
     var mkdocs_page_input_path = "python\u8fdb\u9636/\u7f51\u7f16\u5e76\u53d1.md";
     var mkdocs_page_url = null;
   </script>
@@ -193,25 +193,9 @@
                     
     <a class="" href="../生成器/">02 迭代器与生成器</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../文件操作/">03 文件操作</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../with/">04 with上下文</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../闭包装饰器/">05 闭包与装饰器</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../描述符/">06 Python中的描述符</a>
-                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">07 网络编程与并发编程</a>
+    <a class="current" href="./">03 网络编程与并发编程</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#_1">个人博客</a></li>
@@ -223,6 +207,10 @@
         
             <li><a class="toctree-l4" href="#gil">GIL——全局解释器锁</a></li>
         
+            <li><a class="toctree-l4" href="#gil_1">GIL的特点</a></li>
+        
+            <li><a class="toctree-l4" href="#gil_2">GIL无法保证线程绝对安全</a></li>
+        
             <li><a class="toctree-l4" href="#_3">守护进程</a></li>
         
         </ul>
@@ -232,15 +220,35 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../socket编程/">08 Python中原生的socket</a>
+    <a class="" href="../socket编程/">04 Python中原生socket的案例</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../copy/">09 Python中的深拷贝与浅拷贝</a>
+    <a class="" href="../并发编程提升/">05 Python并发编程提升篇</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../asyncio/">10 Python异步编程与asyncio</a>
+    <a class="" href="../文件操作/">06 文件操作</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../with/">07 with上下文</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../闭包装饰器/">08 闭包与装饰器</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../描述符/">09 Python中的描述符</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../copy/">10 Python中的深拷贝与浅拷贝</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../asyncio/">11 Python异步编程与asyncio</a>
                 </li>
     </ul>
 	    </li>
@@ -316,7 +324,7 @@
         
       
     
-    <li>07 网络编程与并发编程</li>
+    <li>03 网络编程与并发编程</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -348,9 +356,51 @@
 <p><a href="https://www.cnblogs.com/paulwhw/articles/10730647.html">线程2:enumerate方法、守护线程、线程锁、死锁现象(递归锁与互斥锁)、线程队列、进程池与线程池</a></p>
 <h2 id="_2">重要概念</h2>
 <h4 id="gil">GIL——全局解释器锁</h4>
-<p>python中单个进程下的多线程不能同时访问多个CPU，这是<code>CPython解释器</code>导致的：GIL锁。</p>
-<p>但是JPython解释器以及pypy解释器是可以进行多线程访问多核的，不过，没必要研究！</p>
-<p>虽然Python程序的一个进程的多个线程是没办法访问多核的，但是多个进程是可以访问多核的，因此如果用Python想要访问多核的话，可以用“分布式”！</p>
+<p>GIL的全称是Global Interpreter Lock, </p>
+<ul>
+<li>python中一个线程对应于c语言中的一个线程</li>
+<li>GIL使得同一个时刻只有一个线程在一个cpu上执行字节码, 无法将多个线程映射到多个cpu上执行</li>
+<li>GIL会根据执行的字节码行数以及时间片释放gil, gil在遇到io的操作时候主动释放</li>
+</ul>
+<h4 id="gil_1">GIL的特点</h4>
+<ul>
+<li>
+<p>Python在多线程下，每个线程的执行方式为：</p>
+</li>
+<li>
+<p>获取GIL</p>
+</li>
+<li>执行代码直到sleep或者是python虚拟机将其挂起。</li>
+<li>释放GIL</li>
+</ul>
+<p>一个CPU只能执行一个线程, 例如一个CPU 有三个线程, 首先线程A执行, 然后线程A达到释放条件进行释放GIL, 线程B和线程C进行竞争GIL, 谁抢到GIL, 继续执行.</p>
+<h4 id="gil_2">GIL无法保证线程绝对安全</h4>
+<pre><code class="python">total = 0
+
+def add():
+    global total
+    for i in range(1000000):
+        total += 1
+
+def desc():
+    global total
+    for i in range(1000000):
+        total -= 1
+
+import threading
+thread1 = threading.Thread(target=add)
+thread2 = threading.Thread(target=desc)
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+print(total)
+&quot;&quot;&quot;
+每一次的结果都不一样！
+&quot;&quot;&quot;
+</code></pre>
+
 <h4 id="_3">守护进程</h4>
 <p>本身是一个子进程。</p>
 <p>守护的是“主进程的代码”（就是 <code>if __name__ == '__main__'</code>下面的代码） —— 正常情况不设置守护进程！</p>
@@ -366,10 +416,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../socket编程/" class="btn btn-neutral float-right" title="08 Python中原生的socket">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../socket编程/" class="btn btn-neutral float-right" title="04 Python中原生socket的案例">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../描述符/" class="btn btn-neutral" title="06 Python中的描述符"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../生成器/" class="btn btn-neutral" title="02 迭代器与生成器"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -395,7 +445,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../描述符/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../生成器/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../socket编程/" style="color: #fcfcfc">Next &raquo;</a></span>
