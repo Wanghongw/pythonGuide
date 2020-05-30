@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>09 logging模块 - Python服务端入门与进阶指南</title>
+  <title>12 Python协程详解与进阶 - Python服务端入门与进阶指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "09 logging\u6a21\u5757";
-    var mkdocs_page_input_path = "python\u57fa\u7840/logging.md";
+    var mkdocs_page_name = "12 Python\u534f\u7a0b\u8be6\u89e3\u4e0e\u8fdb\u9636";
+    var mkdocs_page_input_path = "python\u8fdb\u9636/asyncio2.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -73,27 +73,27 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../list/">01 列表list</a>
+    <a class="" href="../../python基础/list/">01 列表list</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../dict/">02 字典dict</a>
+    <a class="" href="../../python基础/dict/">02 字典dict</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../tuple/">03 元组tuple</a>
+    <a class="" href="../../python基础/tuple/">03 元组tuple</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../字符串/">04 字符串str</a>
+    <a class="" href="../../python基础/字符串/">04 字符串str</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../set/">05 集合set</a>
+    <a class="" href="../../python基础/set/">05 集合set</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../数字/">06 数字类型</a>
+    <a class="" href="../../python基础/数字/">06 数字类型</a>
                 </li>
     </ul>
 	    </li>
@@ -104,85 +104,79 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../内置函数/">01 常用内置函数</a>
+    <a class="" href="../../python基础/内置函数/">01 常用内置函数</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../异常/">02 异常处理</a>
+    <a class="" href="../../python基础/异常/">02 异常处理</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../os模块/">03 os模块</a>
+    <a class="" href="../../python基础/os模块/">03 os模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../sys模块/">04 sys模块</a>
+    <a class="" href="../../python基础/sys模块/">04 sys模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../time模块/">05 time模块</a>
+    <a class="" href="../../python基础/time模块/">05 time模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../序列化模块/">06 序列化模块</a>
+    <a class="" href="../../python基础/序列化模块/">06 序列化模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../string/">07 string模块</a>
+    <a class="" href="../../python基础/string/">07 string模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../random/">08 random模块</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">09 logging模块</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#_1">个人博客</a></li>
-    
-
-    </ul>
+    <a class="" href="../../python基础/random/">08 random模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../optparse/">10 optparse模块</a>
+    <a class="" href="../../python基础/logging/">09 logging模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../datetime模块/">11 datetime与dateutil模块</a>
+    <a class="" href="../../python基础/optparse/">10 optparse模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../collections/">12 collections模块</a>
+    <a class="" href="../../python基础/datetime模块/">11 datetime与dateutil模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../加密解密/">13 加密与解密模块</a>
+    <a class="" href="../../python基础/collections/">12 collections模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../configparser/">14 configparser模块</a>
+    <a class="" href="../../python基础/加密解密/">13 加密与解密模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../re模块/">15 正则表达式与re模块</a>
+    <a class="" href="../../python基础/configparser/">14 configparser模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../操作excel/">16 Python3操作Excel</a>
+    <a class="" href="../../python基础/re模块/">15 正则表达式与re模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../pymysql/">17 操作数据库pymysql模块</a>
+    <a class="" href="../../python基础/操作excel/">16 Python3操作Excel</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../SQLAlchemy/">18 操作数据库SQLAlchemy模块</a>
+    <a class="" href="../../python基础/pymysql/">17 操作数据库pymysql模块</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../hmac/">19 校验客户端的合法性hmac模块</a>
+    <a class="" href="../../python基础/SQLAlchemy/">18 操作数据库SQLAlchemy模块</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../python基础/hmac/">19 校验客户端的合法性hmac模块</a>
                 </li>
     </ul>
 	    </li>
@@ -193,51 +187,54 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../python进阶/面向对象/">01 进阶知识点与面向对象整合</a>
+    <a class="" href="../面向对象/">01 进阶知识点与面向对象整合</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/生成器/">02 迭代器与生成器</a>
+    <a class="" href="../生成器/">02 迭代器与生成器</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/网编并发/">03 网络编程与并发编程</a>
+    <a class="" href="../网编并发/">03 网络编程与并发编程</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/socket编程/">04 Python中原生socket的案例</a>
+    <a class="" href="../socket编程/">04 Python中原生socket的案例</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/并发编程提升/">05 Python并发编程提升篇</a>
+    <a class="" href="../并发编程提升/">05 Python并发编程提升篇</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/文件操作/">06 文件操作</a>
+    <a class="" href="../文件操作/">06 文件操作</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/with/">07 with上下文</a>
+    <a class="" href="../with/">07 with上下文</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/闭包装饰器/">08 闭包与装饰器</a>
+    <a class="" href="../闭包装饰器/">08 闭包与装饰器</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/描述符/">09 Python中的描述符</a>
+    <a class="" href="../描述符/">09 Python中的描述符</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/copy/">10 Python中的深拷贝与浅拷贝</a>
+    <a class="" href="../copy/">10 Python中的深拷贝与浅拷贝</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/asyncio/">11 Python协程基础</a>
+    <a class="" href="../asyncio/">11 Python协程基础</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../python进阶/asyncio2/">12 Python协程详解与进阶</a>
+    <a class="current" href="./">12 Python协程详解与进阶</a>
+    <ul class="subnav">
+            
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -248,7 +245,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../python进阶/算法数据结构/">01 python实现算法与数据结构</a>
+    <a class="" href="../算法数据结构/">01 python实现算法与数据结构</a>
                 </li>
     </ul>
 	    </li>
@@ -259,19 +256,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../python进阶/缓存与redis/">01 缓存与redis</a>
+    <a class="" href="../缓存与redis/">01 缓存与redis</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/Github与虚拟环境/">02 Github与虚拟环境的使用</a>
+    <a class="" href="../Github与虚拟环境/">02 Github与虚拟环境的使用</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/远程调试/">03 Pycharm连接远程代码</a>
+    <a class="" href="../远程调试/">03 Pycharm连接远程代码</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../python进阶/压测/">04 Mac/Linux压力测试神器Siege</a>
+    <a class="" href="../压测/">04 Mac/Linux压力测试神器Siege</a>
                 </li>
     </ul>
 	    </li>
@@ -282,7 +279,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../python进阶/linux/">01 Linux服务端相关</a>
+    <a class="" href="../linux/">01 Linux服务端相关</a>
                 </li>
     </ul>
 	    </li>
@@ -309,11 +306,11 @@
     
       
         
-          <li>Python内置函数与常用模块介绍 &raquo;</li>
+          <li>Python进阶-面向对象-网编并发 &raquo;</li>
         
       
     
-    <li>09 logging模块</li>
+    <li>12 Python协程详解与进阶</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -323,11 +320,7 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="_1">个人博客</h3>
-<p><a href="https://www.cnblogs.com/paulwhw/articles/10720142.html">用户自己设置日志级别</a></p>
-<p><a href="https://www.cnblogs.com/paulwhw/p/8727802.html">logging模块知识点及应用小结</a></p>
-<p><a href="https://www.cnblogs.com/paulwhw/articles/10665616.html">解决logging模块日志信息重复问题</a></p>
-<p><a href="https://www.cnblogs.com/paulwhw/p/9031836.html">关于解决logging模块写出的日志信息重复的问题</a></p>
+                
               
             </div>
           </div>
@@ -335,10 +328,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../optparse/" class="btn btn-neutral float-right" title="10 optparse模块">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../算法数据结构/" class="btn btn-neutral float-right" title="01 python实现算法与数据结构">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../random/" class="btn btn-neutral" title="08 random模块"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../asyncio/" class="btn btn-neutral" title="11 Python协程基础"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -364,10 +357,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../random/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../asyncio/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../optparse/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../算法数据结构/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
