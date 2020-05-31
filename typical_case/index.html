@@ -89,6 +89,9 @@
     <li class="toctree-l3"><a href="#_7">分割存放连续时间字符串的列表</a></li>
     
 
+    <li class="toctree-l3"><a href="#itertoolschain">itertools.chain实现同时遍历多个可迭代对象</a></li>
+    
+
     <li class="toctree-l3"><a href="#_8">自己实现一个计算器</a></li>
     
 
@@ -301,6 +304,10 @@
                 <li class="">
                     
     <a class="" href="../python进阶/asyncio2/">12 Python协程详解与进阶</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../python进阶/asyncio3/">13 asyncio并发编程进阶</a>
                 </li>
     </ul>
 	    </li>
@@ -610,6 +617,62 @@ def del_dir(filepath):
 
 <h3 id="_7">分割存放连续时间字符串的列表</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
+<h3 id="itertoolschain">itertools.chain实现同时遍历多个可迭代对象</h3>
+<pre><code class="python">&quot;&quot;&quot; 一、调用itertools的chain方法实现&quot;&quot;&quot;
+from itertools import chain
+
+my_list = [1,2,3]
+my_dict = {
+    &quot;html1&quot;:&quot;http://projectsedu.com&quot;,
+    &quot;html2&quot;:&quot;http://www.imooc.com&quot;,
+}
+
+for value in chain(my_list,my_dict,range(1,5)):
+    print(value)
+&quot;&quot;&quot;
+1
+2
+3
+html1
+html2
+1
+2
+3
+4
+&quot;&quot;&quot;
+
+&quot;&quot;&quot; 二、使用yield实现该功能&quot;&quot;&quot;
+my_list = [1,2,3]
+my_dict = {
+    &quot;html1&quot;:&quot;http://projectsedu.com&quot;,
+    &quot;html2&quot;:&quot;http://www.imooc.com&quot;,
+}
+
+# 自己是心啊一个chain效果的函数
+def my_chain(*args, **kwargs):
+    for my_iterable in args:
+        for value in my_iterable:
+            yield value
+
+for value in my_chain(my_list, my_dict, range(5,7)):
+    print(value)
+
+
+&quot;&quot;&quot; 三、使用yield from实现该功能 &quot;&quot;&quot;
+my_list = [1,2,3]
+my_dict = {
+    &quot;html1&quot;:&quot;http://projectsedu.com&quot;,
+    &quot;html2&quot;:&quot;http://www.imooc.com&quot;,
+}
+
+def my_chain(*args, **kwargs):
+    for my_iterable in args:
+        yield from my_iterable
+
+for value in my_chain(my_list, my_dict, range(5,7)):
+    print(value)
+</code></pre>
+
 <h3 id="_8">自己实现一个计算器</h3>
 <pre><code class="python"># -*- coding:utf-8 -*-
 import re
