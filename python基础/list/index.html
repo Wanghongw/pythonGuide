@@ -106,7 +106,10 @@
     <li class="toctree-l3"><a href="#_7">列表有关的几个小练习</a></li>
     
 
-    <li class="toctree-l3"><a href="#_8">列表当作函数默认参数的坑</a></li>
+    <li class="toctree-l3"><a href="#1_1">列表当作函数默认参数的坑1</a></li>
+    
+
+    <li class="toctree-l3"><a href="#2_1">列表作为默认参数的坑2</a></li>
     
 
     </ul>
@@ -649,7 +652,7 @@ print(l)#[0, 1, 2, 3]
 <p><strong>自己平时写代码时总结的一些demo</strong></p>
 <p><a href="https://www.cnblogs.com/paulwhw/p/9144699.html">列表中数字元素转字符串的不同解法</a></p>
 <p><a href="https://www.cnblogs.com/paulwhw/articles/12334137.html">分割处理存放连续时间字符串的列表</a></p>
-<h3 id="_8">列表当作函数默认参数的坑</h3>
+<h3 id="1_1">列表当作函数默认参数的坑1</h3>
 <p><a href="https://www.cnblogs.com/paulwhw/p/11891081.html">关于“可变数据类型”做函数默认参数的问题</a></p>
 <pre><code class="python">def add(a, b):
     a += b
@@ -684,7 +687,90 @@ if __name__ == &quot;__main__&quot;:
     print (com2.staffs) # ['whw', 'whw5']
     print (com3.staffs) # ['whw', 'whw5']
     print (com2.staffs is com3.staffs) # True
+</code></pre>
 
+<h3 id="2_1">列表作为默认参数的坑2</h3>
+<pre><code class="python">&quot;&quot;&quot; 一 &quot;&quot;&quot;
+# 列表作为默认参数
+def lst_func(name:str,age:int,default_lst=[])-&gt;dict:
+    default_lst.append(name)
+    dic = dict(
+        name=name,
+        age=age,
+        lst=default_lst,
+        )
+    return dic
+
+# 使用默认的default使用的是同一个默认的列表
+test1 = lst_func(&quot;naruto&quot;,28)
+test2 = lst_func(&quot;sasuke&quot;,38)
+# 指定default_lst
+test3 = lst_func(&quot;whw&quot;,18,default_lst=[])
+
+# print(&quot;test1&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test1)
+# print(&quot;test2&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test2)
+# print(&quot;test3&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test3)
+&quot;&quot;&quot;
+test1&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'naruto', 'age': 28, 'lst': ['naruto', 'sasuke']}
+test2&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'sasuke', 'age': 38, 'lst': ['naruto', 'sasuke']}
+test3&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'whw', 'age': 18, 'lst': ['whw']}
+&quot;&quot;&quot;
+
+&quot;&quot;&quot; 二 &quot;&quot;&quot;
+# 使用clear方法 “重置”列表
+def lst_func(name:str,age:int,default_lst=[])-&gt;dict:
+    # clear之后，实际上还是使用的是同一个列表
+    default_lst.clear()
+    default_lst.append(name)
+    dic = dict(
+        name=name,
+        age=age,
+        lst=default_lst,
+        )
+    return dic
+
+
+test1 = lst_func(&quot;naruto&quot;,28)
+test2 = lst_func(&quot;sasuke&quot;,38)
+
+test3 = lst_func(&quot;whw&quot;,18,default_lst=[])
+
+# print(&quot;test1&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test1)
+# print(&quot;test2&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test2)
+# print(&quot;test3&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test3)
+&quot;&quot;&quot;
+test1&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'naruto', 'age': 28, 'lst': ['naruto', 'sasuke']}
+test2&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'sasuke', 'age': 38, 'lst': ['naruto', 'sasuke']}
+test3&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'whw', 'age': 18, 'lst': ['whw']}
+&quot;&quot;&quot;
+
+&quot;&quot;&quot; 三 &quot;&quot;&quot;
+# 不指定在函数内部生成一个新的列表
+def lst_func(name:str,age:int,default_lst=[])-&gt;dict:
+    # 指向一个新列表
+    default_lst = []
+    default_lst.append(name)
+    dic = dict(
+        name=name,
+        age=age,
+        lst=default_lst,
+        )
+    return dic
+
+
+test1 = lst_func(&quot;naruto&quot;,28)
+test2 = lst_func(&quot;sasuke&quot;,38)
+
+test3 = lst_func(&quot;whw&quot;,18,default_lst=[])
+
+print(&quot;test1&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test1)
+print(&quot;test2&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test2)
+print(&quot;test3&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;,test3)
+&quot;&quot;&quot;
+test1&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'naruto', 'age': 28, 'lst': ['naruto']}
+test2&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'sasuke', 'age': 38, 'lst': ['sasuke']}
+test3&gt;&gt;&gt;&gt;&gt;&gt;&gt; {'name': 'whw', 'age': 18, 'lst': ['whw']}
+&quot;&quot;&quot;
 </code></pre>
               
             </div>
